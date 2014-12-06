@@ -1,0 +1,10 @@
+development: &default
+  adapter: postgresql
+  database: pathfinder_development
+  username: development
+  password: development
+  host: localhost
+
+test:
+  <<: *default
+  database: pathfinder_development

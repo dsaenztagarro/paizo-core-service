@@ -1,0 +1,19 @@
+language: ruby
+rvm:
+- 2.1.5
+before_install:
+- gem update --system
+- gem --version
+before_script:
+- psql -c 'create database pathfinder_test;' -U postgres
+- cp config/database.yml.travis config/database.yml
+script:
+- export TRAVIS=true
+- export RACK_ENV=test
+- bundle exec rake db:migrate --trace
+- bundle exec rake db:test:prepare
+- bundle exec rake
+addons:
+  postgresql: "9.3"
+  code_climate:
+      repo_token: 6d9adf40038ebdce0322b9acb94f74e75e34ccd4ce6b59b5eb6335f212cd2fe3
